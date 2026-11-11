@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Amplify your phone's microphone into your headphones to hear quiet sounds around you." />
+    <meta name="theme-color" content="#0f1720" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Mic Enhancer" />
+    <title>Mic Enhancer</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <h1>Mic Enhancer</h1>
+        <p class="tagline">Hear more of what's around you. Put on headphones, then tap Start.</p>
+      </header>
+
+      <p id="message" class="message" role="alert" hidden></p>
+
+      <button id="power" class="power" type="button" aria-pressed="false">
+        <span class="power-icon" aria-hidden="true"></span>
+        <span id="power-label">Start</span>
+      </button>
+
+      <section class="meters" aria-label="Sound levels">
+        <div class="meter-row">
+          <span class="meter-label">In</span>
+          <div class="meter" aria-hidden="true"><div id="meter-in" class="meter-fill"></div></div>
+          <span id="clip" class="indicator indicator-clip" title="The microphone itself is overloading">Clip</span>
+        </div>
+        <div class="meter-row">
+          <span class="meter-label">Out</span>
+          <div class="meter" aria-hidden="true"><div id="meter-out" class="meter-fill"></div></div>
+          <span id="limit" class="indicator indicator-limit" title="The safety limiter is turning loud sounds down">Limit</span>
+        </div>
+      </section>
+
+      <section class="controls" aria-label="Controls">
+        <div class="control">
+          <div class="control-head">
+            <label for="gain">Gain</label>
+            <output id="gain-value" for="gain">+12 dB</output>
+          </div>
+          <input id="gain" type="range" min="0" max="30" step="1" value="12" />
+          <p class="hint">How much the microphone is boosted.</p>
+        </div>
+
+        <div class="control">
+          <div class="control-head">
+            <label for="volume">Volume</label>
+            <output id="volume-value" for="volume">30%</output>
+          </div>
+          <input id="volume" type="range" min="0" max="100" step="1" value="30" />
+          <p class="hint">How loud it plays in your headphones.</p>
+        </div>
+
+        <h2 class="section-title">EQ</h2>
+
+        <div class="control">
+          <div class="control-head">
+            <label for="lowcut">Low cut</label>
+            <output id="lowcut-value" for="lowcut">100 Hz</output>
+          </div>
+          <input id="lowcut" type="range" min="0" max="1000" step="1" value="411" />
+          <p class="hint">Trims rumble, wind and traffic. Far left is off.</p>
+        </div>
+
+        <div class="control">
+          <div class="control-head">
+            <label for="highcut">High cut</label>
+            <output id="highcut-value" for="highcut">10 kHz</output>
+          </div>
+          <input id="highcut" type="range" min="0" max="1000" step="1" value="769" />
+          <p class="hint">Trims hiss and harsh sounds. Far right is off.</p>
+        </div>
+      </section>
+
+      <button id="reset" class="reset" type="button">Reset to defaults</button>
+
+      <footer class="app-footer">
+        <p>
+          Use <strong>wired headphones</strong> if you can. Bluetooth adds a noticeable delay.
+          Keep your phone's own volume moderate. The limiter caps sudden loud sounds,
+          but your ears are worth protecting.
+        </p>
+      </footer>
+    </main>
+
+    <dialog id="headphone-notice" class="notice" aria-labelledby="notice-title">
+      <form method="dialog">
+        <h2 id="notice-title">Headphones on?</h2>
+        <p>
+          This app plays the microphone back out loud. Through the phone speaker it will
+          <strong>squeal with feedback</strong>, so plug in headphones first.
+        </p>
+        <p>Wired headphones work best. Bluetooth headphones add a delay you'll notice.</p>
+        <div class="notice-actions">
+          <button value="cancel" type="submit" class="button-secondary">Cancel</button>
+          <button value="confirm" type="submit" class="button-primary" autofocus>Headphones on, start</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

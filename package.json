@@ -1,0 +1,14 @@
+{
+  "name": "mic-enhancer",
+  "version": "1.0.0",
+  "description": "Phone web app that amplifies your microphone into your headphones, with gain, volume and a low/high cut EQ.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/serve.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
